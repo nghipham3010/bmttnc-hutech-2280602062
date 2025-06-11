@@ -53,10 +53,11 @@ class PlayfairCipher:
     def playfair_decrypt(self, cipher_text, matrix):
         cipher_text = cipher_text.upper()
         decrypted_text = ""
-        decrypted_text1 = ""
 
         for i in range(0, len(cipher_text), 2):
             pair = cipher_text[i:i+2]
+            if len(pair) < 2:
+                pair += "X"
             row1, col1 = self.find_letter_coords(matrix, pair[0])
             row2, col2 = self.find_letter_coords(matrix, pair[1])
 
@@ -67,17 +68,4 @@ class PlayfairCipher:
             else:
                 decrypted_text += matrix[row1][col2] + matrix[row2][col1]
 
-        banro = ""
-        # Loại bỏ ký tự "X" nếu nó được thêm vào
-        for i in range(0, len(decrypted_text), 2):
-            if decrypted_text[i] == decrypted_text[i+2]:
-                banro += decrypted_text[i]
-            else:
-                banro += decrypted_text[i] + " " + decrypted_text[i+1]
-
-        if decrypted_text[-1] == "X":
-            banro += decrypted_text[-2]
-        else:
-            banro += decrypted_text[-2] + decrypted_text[-1]
-
-        return banro
+        return decrypted_text
