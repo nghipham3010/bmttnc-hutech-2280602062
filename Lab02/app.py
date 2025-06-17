@@ -15,7 +15,7 @@ def home():
 def caesar():
     return render_template('caesar.html')
 
-@app.route("/encrypt_caesar", methods=['POST'])
+@app.route("/encrypt", methods=['POST'])
 def caesar_encrypt():
     text = request.form['inputPlainText']
     key = int(request.form['inputKeyPlain'])
@@ -23,7 +23,7 @@ def caesar_encrypt():
     encrypted_text = Caesar.encrypt_text(text, key)
     return f"<h3>Caesar Encryption</h3>Text: {text}<br/>Key: {key}<br/>Encrypted Text: {encrypted_text}<br/><a href='/caesar'>Back</a>"
 
-@app.route("/decrypt_caesar", methods=['POST'])
+@app.route("/decrypt", methods=['POST'])
 def caesar_decrypt():
     text = request.form['inputCipherText']
     key = int(request.form['inputKeyCipher'])
